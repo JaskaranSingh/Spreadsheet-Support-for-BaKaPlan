@@ -1,5 +1,5 @@
-MySQL with C++
-==============
+Spreadsheet Parser for BaKaPlan
+===============================
 
 Steps:
 
