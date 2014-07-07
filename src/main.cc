@@ -58,6 +58,61 @@ void PARSER::  ConvertToCsv()
     system("libreoffice --headless --convert-to csv upload.ods");
 }
 
+
+void PARSER :: CheckFormat()
+{
+    fstream fin;
+    fin.open("upload.csv");
+   
+    string temp;
+    int check=0,sub_names=0,sub_codes=0;
+
+    getline(fin,temp,',');
+    if(temp.compare("Class_Name")==0)
+    {
+        getline(fin,temp,',');        
+        if(temp.compare("Sub_Name")==0)
+        {
+            getline(fin,temp,',');        
+            if(temp.compare("Sub_Code")==0)
+            {
+                getline(fin,temp,'\n');        
+                if(temp.compare("Roll_No")==0)
+                    check=1;
+            }
+        }
+    }
+    
+    if(check==1)
+    {
+        while(fin)
+        {
+            getline(fin,temp,',');
+            if (!temp.empty())
+            {
+                getline(fin,temp,',');  
+                if (!temp.empty())
+                    sub_names++;
+                
+                getline(fin,temp,','); 
+                if (!temp.empty())   
+                    sub_codes++;
+
+                getline(fin,temp,'\n');
+            }
+            else
+                getline(fin,temp,'\n');
+        }
+        if(sub_codes==sub_names)
+            InsertInDatabase();
+        else
+            cout<<"Format is not correct";
+    }
+    else
+        cout<<"Format is not correct";
+
+    fin.close();
+}
 /**
  *--------------------------------------------------------------------
  *       Class:  MySQL
@@ -79,7 +134,7 @@ void PARSER :: InsertInDatabase()
 
      while (fin)
       {  
-        int i=-1,x=0;
+        int n=-1,x=0;
  
 	while(!x)
 	{     
@@ -87,7 +142,7 @@ void PARSER :: InsertInDatabase()
 		     
 	    if(temp.compare("Class_Name")!=0)
 		{
-		        if (!temp.empty())
+		    if (!temp.empty())
                         {strcpy(c, temp.c_str());
 			 cn = string(c);
 			}
@@ -109,8 +164,8 @@ void PARSER :: InsertInDatabase()
                        {
 			    strcpy(c, temp.c_str());
 			    srn = string(c);
-		    	    i++;
-		   	    a[i] = atoi(srn.c_str());
+		    	    n++;
+		   	    a[n] = atoi(srn.c_str());
 			}
 
 		    else
@@ -121,22 +176,20 @@ void PARSER :: InsertInDatabase()
 		getline(fin,temp,'\n');
 	}
 
-  
-    for (int m=1;m<i ; m++ )
-	{ 
-	    for( int j=0; j<i-1; j++) 
-		{ if(a[j] > a[j+1]) 
-		    { 
-			int tem; 
-		        tem = a[j];
-			a[j] = a[j+1]; 
-			a[j+1] = tem;
-		     } 
-		}
-	 } 
+    for(int i=0;i<n;i++){
+        int min=i;
+        for(int j=i+1;j<=n;j++){
+            if(a[min] > a[j]){
+                min=j;
+            }
+        }
+        int tmp = a[min];
+        a[min] = a[i];
+        a[i] = tmp;
+    }
 
     small = a[0];
-    large = a[i];
+    large = a[n];
   
     ostringstream convert, convert1, nistring;
     convert << small;
@@ -146,12 +199,12 @@ void PARSER :: InsertInDatabase()
     ern = convert1.str();
 
 
-    for (int z=0; z<=i; z++)
+    for (int z=0; z<=n; z++)
 	{
 	    if (a[z] != small)
 	    while( small < a[z] )
 	        {
-		    nistring << small <<",";
+		    nistring << small<<",";
 		    small++;
 		}
 		small++;

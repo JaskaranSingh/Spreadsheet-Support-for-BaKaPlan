@@ -14,7 +14,8 @@ int main(void)
 
     Parser.upload();
   	Parser.ConvertToCsv();
-    Parser.InsertInDatabase();
+    Parser.CheckFormat();
+    //Parser.InsertInDatabase();
 
     return 0;
 }

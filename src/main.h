@@ -19,7 +19,7 @@ class PARSER
         /** Functions**/
         void InsertInDatabase();
         void ConvertToCsv();
-
+        void CheckFormat();
 	    void upload();
 
         /** Destructor */
