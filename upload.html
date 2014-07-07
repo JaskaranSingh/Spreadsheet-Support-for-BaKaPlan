@@ -4,16 +4,23 @@
 		function Checkfiles()
 			{
 				var fup = document.getElementById('filename');
+
+				if(fup.value.length==0)
+				{
+					alert("Please choose a file to upload");
+					return false;
+				}
+				
 				var fileName = fup.value;
 				var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
-				if(ext == "ods" || ext == "xls" ext == "xlsx" ext == "odt")
+				if(ext == "ods" || ext == "xls" || ext == "xlsx" || ext == "odt")
 					{
 						return true;
 					} 
 				else
 					{
 						alert("Upload .ods, .xls, .xlsx, .odt files only");
-						//fup.focus();
+						fup.focus();
 						return false;
 					}
 			}
