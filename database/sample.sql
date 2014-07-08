@@ -39,20 +39,6 @@ CREATE TABLE IF NOT EXISTS `csv` (
 -- Dumping data for table `csv`
 --
 
-INSERT INTO `csv` (`Class_name`, `Subject_Name`, `Subject_Code`, `Start_Roll_No`, `End_Roll_No`, `Not_included`) VALUES
-('CSE', 'DAA', 'BTCS-303', '119', '123', '122,123,124,126,'),
-('Mech', 'Thermal', 'BTME-202', '388', '395', '390,392,394,395,396,'),
-('IT', 'cyber laws', 'BTIT-505', '487', '495', '488,493,495,'),
-('CSE', 'DAA', 'BTCS-303', '119', '123', '122,123,124,126,'),
-('Mech', 'Thermal', 'BTME-202', '388', '395', '390,392,394,395,396,'),
-('IT', 'cyber laws', 'BTIT-505', '487', '495', '488,493,495,'),
-('CSE', 'DAA', 'BTCS-303', '119', '123', '122,123,124,126,'),
-('Mech', 'Thermal', 'BTME-202', '388', '395', '390,392,394,395,396,'),
-('IT', 'cyber laws', 'BTIT-505', '487', '495', '488,493,495,'),
-('CSE', 'DAA', 'BTCS-303', '119', '123', '122,123,124,126,'),
-('Mech', 'Thermal', 'BTME-202', '388', '395', '390,392,394,395,396,'),
-('IT', 'cyber laws', 'BTIT-505', '487', '495', '488,493,495,');
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
