@@ -30,7 +30,7 @@ void PARSER :: upload()
    
    ofstream outFile;
 
-   outFile.open("upload.ods");
+   outFile.open("../upload/upload.ods");
 
    // get list of files to be uploaded
     const_file_iterator file = cgi.getFile("userfile");
@@ -55,14 +55,14 @@ void PARSER :: upload()
 
 void PARSER::  ConvertToCsv()
 {
-    system("libreoffice --headless --convert-to csv upload.ods");
+    system("libreoffice --headless --convert-to csv --outdir ../upload/ ../upload/upload.ods");
 }
 
 
 void PARSER :: CheckFormat()
 {
     fstream fin;
-    fin.open("upload.csv");
+    fin.open("../upload/upload.csv");
    
     string temp;
     int check=0,sub_names=0,sub_codes=0;
@@ -125,7 +125,7 @@ void PARSER :: InsertInDatabase()
 {
 
     fstream fin;
-    fin.open("upload.csv");
+    fin.open("../upload/upload.csv");
 
     int a[100],large, small;
     string temp,cn,sn,sc,query,srn,ern,ni;
